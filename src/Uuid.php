@@ -92,7 +92,7 @@ abstract class Uuid implements \Serializable
 		return $this->toString() === $obj->toString();
 	}
 
-	public function __debugInfo()
+	public function __debugInfo(): array
 	{
 		return ['uuid' => (string)$this];
 	}

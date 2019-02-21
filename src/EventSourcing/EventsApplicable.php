@@ -11,11 +11,11 @@ interface EventsApplicable
 	 * @param DomainEvent $domainEvent
 	 * @internal
 	 */
-	public function applyIfAccepts(DomainEvent $domainEvent);
+	public function applyIfAccepts(DomainEvent $domainEvent): void;
 
 	/**
 	 * Apply domain event; if objects does not accepts this event -> fail
 	 * @param DomainEvent $domainEvent
 	 */
-	public function apply(DomainEvent $domainEvent);
+	public function apply(DomainEvent $domainEvent): void;
 }

@@ -11,7 +11,7 @@ class AggregatePersister
 
 	}
 
-	public function load(string $aggregateRootType, Uuid $id) {
+	public function load(string $aggregateRootType, Uuid $id): void {
 
 		// load event stream
 

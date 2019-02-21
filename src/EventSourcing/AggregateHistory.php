@@ -11,6 +11,7 @@ use Library\Uuid;
  */
 class AggregateHistory extends ArrayObject {
 
+	/** @var Uuid */
 	private $aggregateId;
 
 	public function __construct(Uuid $aggregateId, DomainEvents $domainEvents)

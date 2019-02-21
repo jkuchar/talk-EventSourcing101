@@ -1,0 +1,9 @@
+includes:
+	- vendor/grifart/phpstan-oneline/config.neon
+	- vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+	ignoreErrors:
+		-
+			message: '#Variable method call on \$this\(Library\\EventSourcing\\AbstractAggregate\)#'
+			path: %currentWorkingDirectory%/src/EventSourcing/AbstractAggregate.php

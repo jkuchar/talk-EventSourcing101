@@ -25,7 +25,7 @@ abstract class AbstractAggregate implements RecordsEvents, EventsApplicable, Rec
 		}
 	}
 
-	public function apply(DomainEvent $domainEvent)
+	public function apply(DomainEvent $domainEvent): void
 	{
 		$method = $this->getApplyMethodForDomainEvent($domainEvent);
 		$this->$method($domainEvent);
@@ -62,12 +62,12 @@ abstract class AbstractAggregate implements RecordsEvents, EventsApplicable, Rec
 		return new DomainEvents($this->recordedEvents);
 	}
 
-	public function clearRecordedEvents()
+	public function clearRecordedEvents(): void
 	{
 		$this->recordedEvents = [];
 	}
 
-	protected function recordThat(DomainEvent $domainEvent)
+	protected function recordThat(DomainEvent $domainEvent): void
 	{
 		$this->recordedEvents[] = $domainEvent;
 		$this->apply($domainEvent);
