@@ -18,7 +18,7 @@ abstract class AbstractAggregate implements RecordsEvents, EventsApplicable, Rec
 		return 'apply' . \end($parts);
 	}
 
-	public function applyIfAccepts(DomainEvent $domainEvent)
+	public function applyIfAccepts(DomainEvent $domainEvent): void
 	{
 		if(method_exists($this, $this->getApplyMethodForDomainEvent($domainEvent))) {
 			$this->apply($domainEvent);
@@ -33,7 +33,8 @@ abstract class AbstractAggregate implements RecordsEvents, EventsApplicable, Rec
 
 	// ---------------------------------------------------------------------
 
-	protected static function createInstanceForGivenHistory(AggregateHistory $aggregateHistory): EventsApplicable
+	/** @return static */
+	protected static function createInstanceForGivenHistory(AggregateHistory $aggregateHistory)
 	{
 		return new static($aggregateHistory->getAggregateId());
 	}
