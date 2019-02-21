@@ -5,6 +5,7 @@ namespace Library\Model;
 use Library\BookId;
 use Library\Events\BookHasBeenInventoried;
 use Library\Events\BookHasBeenLent;
+use Library\Events\BookHasBeenReturned;
 use Library\Events\DomainEvent;
 use Library\EventSourcing\AbstractAggregate;
 use Library\EventSourcing\AggregateHistory;
@@ -57,6 +58,22 @@ final class Book extends AbstractAggregate
 	public function applyBookHasBeenLent(BookHasBeenLent $event): void
 	{
 		// todo: fix me
+	}
+
+	public function return(UserId $returnedBy): void
+	{
+		// todo: check invariants
+
+		$this->recordThat(new BookHasBeenReturned(
+			$this->id,
+			$returnedBy
+		));
+	}
+
+	/** @internal  */
+	public function applyBookHasBeenReturned(BookHasBeenReturned $event): void
+	{
+		// todo
 	}
 
 }
