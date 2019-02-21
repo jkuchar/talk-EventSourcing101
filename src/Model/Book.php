@@ -22,6 +22,9 @@ final class Book extends AbstractAggregate
 	/** @var BookId */
 	private $id;
 
+	/** @var UserId|null */
+	private $lentTo;
+
 	public function __construct(BookId $id)
 	{
 		$this->id = $id;
@@ -49,7 +52,9 @@ final class Book extends AbstractAggregate
 	 */
 	public function lendTo(UserId $lentTo): void
 	{
-		// todo: check invariants
+		if ($this->lentTo !== null) {
+			throw new AlreadyLent();
+		}
 
 		$this->recordThat(new BookHasBeenLent($this->id, $lentTo));
 	}
@@ -57,12 +62,14 @@ final class Book extends AbstractAggregate
 	/** @internal */
 	public function applyBookHasBeenLent(BookHasBeenLent $event): void
 	{
-		// todo: fix me
+		$this->lentTo = $event->lentTo;
 	}
 
 	public function return(UserId $returnedBy): void
 	{
-		// todo: check invariants
+		if ($this->lentTo === null) {
+			throw new HasNotBeenLent();
+		}
 
 		$this->recordThat(new BookHasBeenReturned(
 			$this->id,
@@ -73,7 +80,7 @@ final class Book extends AbstractAggregate
 	/** @internal  */
 	public function applyBookHasBeenReturned(BookHasBeenReturned $event): void
 	{
-		// todo
+		$this->lentTo = null;
 	}
 
 }

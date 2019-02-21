@@ -13,8 +13,8 @@ $book->lendTo($theHichhikersGuideFan);
 $book->return($theHichhikersGuideFan);
 print_r($book->getRecordedEvents());
 
-//\Tester\Assert::exception(function() use ($book) {
-//	$theHichhikersGuideFan2 = \Library\UserId::generate();
-//	$book->lendTo($theHichhikersGuideFan2);
-//}, \Library\Model\AlreadyLent::class);
+\Tester\Assert::exception(function() use ($book) {
+	$theHichhikersGuideFan2 = \Library\UserId::generate();
+	$book->return($theHichhikersGuideFan2);
+}, \Library\Model\HasNotBeenLent::class);
 

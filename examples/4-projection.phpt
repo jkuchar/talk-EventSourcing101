@@ -17,14 +17,8 @@ $book->lendTo($theHichhikersGuideFan2);
 
 $eventsProduced = $book->getRecordedEvents();
 
-
 // --------------------------
 
-
-function whoHasBook(\Library\BookId $id): ?\Library\UserId {
-	// todo implement
-	return null;
-};
 
 
 // normally loaded from persistent storage
@@ -44,9 +38,20 @@ foreach($loadedEvents as $event) {
 		$lentTo = null;
 	}
 
+	file_put_contents(__DIR__ . '/data/'. $event->getAggregateId(), (string) $lentTo);
+
 	echo 'Lent to state ' . $lentTo . "\n";
 	echo "\n";
 
 }
+
+
+function whoHasTheBook(\Library\BookId $id): ?\Library\UserId {
+	$data = \file_get_contents(__DIR__ . '/data/'. $id);
+	if ($data === false) {
+		return null;
+	}
+	return \Library\UserId::reconstitute($data);
+};
 
 

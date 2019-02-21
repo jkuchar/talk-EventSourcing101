@@ -28,3 +28,4 @@ $book = \Library\Model\Book::reconstituteFrom(
 	$book->lendTo($theHichhikersGuideFan2);
 }, \Library\Model\AlreadyLent::class);
 
+$book->return($user1); // will work
