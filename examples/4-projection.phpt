@@ -24,7 +24,8 @@ $eventsProduced = $book->getRecordedEvents();
 // normally loaded from persistent storage
 $loadedEvents = $eventsProduced;
 
-$lentTo = false;
+/** @var null|\Library\UserId $lentTo */
+$lentTo = null;
 
 foreach($loadedEvents as $event) {
 
@@ -48,7 +49,8 @@ foreach($loadedEvents as $event) {
 
 function whoHasTheBook(\Library\BookId $id): ?\Library\UserId {
 	$data = \file_get_contents(__DIR__ . '/data/'. $id);
-	if ($data === false) {
+	\assert($data !== false);
+	if ($data === '') {
 		return null;
 	}
 	return \Library\UserId::reconstitute($data);
