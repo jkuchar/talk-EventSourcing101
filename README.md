@@ -19,4 +19,4 @@ cd examples
 
 ## More reading
 
-- [My collection of notes & sources](https://gitlab.grifart.cz/jkuchar1/eventsourcing-cqrs-simple-app) on DDD and event sourcing topic
+- [My collection of notes & sources](https://github.com/jkuchar/ddd-crqs-event-sourcing-notes) on DDD and event sourcing topic
